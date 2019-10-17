@@ -1,4 +1,4 @@
-var topics = ["excited","angry","happy","hangry"]; 
+var topics = ["excited","angry","happy","hangry","surprised","sad","wild"]; 
 
 // a function to run through a for loop of the array and create buttons for each index
 
