@@ -11,9 +11,23 @@
 </head>
 <body>
     <h1><span id="gradient-text">GIF GENERATOR</span></h1>
-    <div id="content">
+    <div id="container">
+
         <div class="d-flex justify-content-around" id="btn-placement"></div>
-        <div class= "container d-flex flex-wrap justify-content-around" id="GIF-area"></div>
+
+        <div class="d-flex justify-content-center">
+            <form id="GIF-form">
+                <label for="GIF-input">SEARCH FOR MORE GIFS HERE:</label>
+                <input type="text" id="GIF-input"><br>
+            
+                <!-- Button triggers new movie to be added -->
+                <input class="btn btn-dark btn-block" id="add-GIF" type="submit" value="search">
+            </form>
+
+        </div>
+        
+
+        <div class= "d-flex flex-wrap justify-content-around" id="GIF-area"></div>
     </div>
 
 
