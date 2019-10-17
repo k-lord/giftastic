@@ -3,11 +3,14 @@ var topics = ["excited","angry","happy","hangry"];
 // a function to run through a for loop of the array and create buttons for each index
 
 var createButton = function (arr) {
+
+    $("#btn-placement").empty();
+
     for(i = 0; i < arr.length; i ++) {
         var searchWord = arr[i];
         console.log(searchWord);
         var button = $("<button>").text(arr[i]);
-        button.addClass("btn btn-dark");
+        button.addClass("btn btn-dark gifs");
         
         
 
@@ -29,39 +32,47 @@ var createButton = function (arr) {
     }
 }
 
-createButton(topics);
-
 // on click function to GET gifs from Giphy based on data-search id's & prepend response.data[i] info to HTML
 
+function getGIF () {
 
-$("button").on("click", function(){
-    var x = $(this).data("search");
-    console.log(x);
-
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + x + "&api_key=Yto3qlUaI5924crOZKDBgZeRIvCm4xgz&limit=10";
-    console.log(queryURL);
-
-    $.ajax({url: queryURL, method: "GET"})
-        .done(function(response){
-            console.log(response);
-            $("#GIF-area").empty();
-            for (i = 0; i < response.data.length; i++) {
-            
-                $("#GIF-area").append("<img src='" + response.data[i].images.downsized.url + "'>");
-                $("#GIF-area").append("<p>rating: " + response.data[i].rating + "</p>");
+    $("button").on("click", function(){
+        console.log("button clicked");
+        var x = $(this).data("search");
+        console.log(x);
     
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + x + "&api_key=Yto3qlUaI5924crOZKDBgZeRIvCm4xgz&limit=10";
+        console.log(queryURL);
+    
+        $.ajax({url: queryURL, method: "GET"})
+            .done(function(response){
+                console.log(response);
+                $("#GIF-area").empty();
+                for (i = 0; i < response.data.length; i++) {
+                
+                    $("#GIF-area").append("<img src='" + response.data[i].images.downsized.url + "'>");
+                    //$("#GIF-area").append("<p>rating: " + response.data[i].rating + "</p>");   
+                }
+            });
+    })   
+}
 
 
-            }
-        });
-})
 
+// take the value of the #add-GIF input text and add to topics array & create button
 
-/*<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>*/
+$("#add-GIF").on("click", function(event) {
+    event.preventDefault();
+    var GIF = $("#GIF-input").val().trim();
+    topics.push(GIF);
+    createButton(topics);
+    $("#GIF-input").val("");
+});
+
+// Adding click event listeners to all elements with a class of "gifs"
+$(document).on("click", ".gifs", getGIF);
+
+createButton(topics);
+
 
 
