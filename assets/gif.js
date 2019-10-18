@@ -1,31 +1,28 @@
 // the array of gif button topics
-var topics = ["excited","angry","happy","hangry","surprised","sad","high five","bye","shrug","yes","thumbs up","what","no","whatever","OMG","mind blown","facepalm","shame","dancing","shocked","get money","popcorn","eye roll","confused","yay","WTF","K","applause","SMH","nope","LOL","why"];
-
-//boolean statement to call on later on to toggle the GIFs between paused and playing
-var gifPaused = true;
+var topics = ["hangry","shrug","no","OMG","mind blown","facepalm","shame","dancing","shocked","get money","popcorn","eye roll","confused","WTF","K","SMH","nope","LOL","why"];
+// empty array to eventually push topics once a button is closed
+var closes = [];
 
 // the function to run through a for loop of the topics array and create buttons for each index
 var createButton = function (arr) {
-
+    //clears btn-placement div so we don't get repeat buttons each time we add a new button
     $("#btn-placement").empty();
 
     for(i = 0; i < arr.length; i ++) {
         var searchWord = arr[i];
-        console.log(searchWord);
-        var button = $("<button>").text(arr[i]);
-        button.addClass("btn btn-dark gifs");
-        
-        //append button to HTML page for each index of array
-        $("#btn-placement").append(button);
-        
-        //add data-search to each button that = the array index
-        button.data("search", searchWord);
-        var x = button.data("search");
-        console.log("data search is " + x);
+        //creating a button for each item in the array
+        var topicButton = $("<button>");
+        topicButton.addClass("btn btn-dark gifs");
+        topicButton.attr("data-search", searchWord);
+        topicButton.text(searchWord);
+        $("#btn-placement").append(topicButton);
+        //appending a close button to each button made
+        var closeButton = $("<button>");
+        closeButton.attr("id", i);
+        closeButton.addClass("close").text("x");
+        closes.push(closeButton);
+        $(topicButton).append(closeButton);
 
-        //add text to each button that = the array index
-        $("#gifbtn").text(searchWord);
-        console.log("button text is " + searchWord);
     }
 }
 
@@ -35,10 +32,8 @@ function getGIF () {
     $("button").on("click", function(){
         console.log("button clicked");
         var x = $(this).data("search");
-        console.log("the data-search for the clicked button is: " + x);
     
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + x + "&api_key=Yto3qlUaI5924crOZKDBgZeRIvCm4xgz&limit=12";
-        console.log(queryURL);
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + x + "&api_key=Yto3qlUaI5924crOZKDBgZeRIvCm4xgz&limit=10";
     
         $.ajax({url: queryURL, method: "GET"})
             .done(function(response){
@@ -47,11 +42,9 @@ function getGIF () {
                 for (i = 0; i < response.data.length; i++) {
                 
                     $("#GIF-area").append("<img class='gifImage' src='" + response.data[i].images.fixed_height_still.url + "'>");
-                    
+                    //working on getting the <p> formatting so that it becomes a text overlay on the image
                     //$("#GIF-area").append("<p>rating: " + response.data[i].rating + "</p>");
                 }
-
-
             });
     })   
 }
@@ -66,7 +59,6 @@ $("#add-GIF").on("click", function(event) {
 });
 
 //function to toggle between paused imgs and playing gifs
-
 $(document).on("click", ".gifImage", function() {
     var src = $(this).attr("src");
     if($(this).hasClass('playing')){
@@ -82,10 +74,18 @@ $(document).on("click", ".gifImage", function() {
   }
 });
 
-
-
-// Adding click event listeners to all elements with a class of ".gifs"
+// Adding click event listeners to all elements with a class of ".gifs" to GET the gifs from Giphy API once clicked
 $(document).on("click", ".gifs", getGIF);
+
+// Adding click event to remove topics from array with the close button
+$(document).on("click", ".close", function(event){
+    event.preventDefault();
+    console.log("button closed");
+    removeID = $(this).attr("id");
+    topics = topics.filter(function(obj, id) {return id != removeID});
+    console.log(topics);
+    createButton(topics);
+  });
 
 
 createButton(topics);

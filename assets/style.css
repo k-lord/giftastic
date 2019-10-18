@@ -65,7 +65,7 @@ img {
 
 p {
     /*
-    having issues getting this absolute position fixed to the image files:
+    having issues getting this absolute position fixed to the images:
     position: absolute;
     right: -3em;*/
     background-color: black;
@@ -80,5 +80,21 @@ p {
       margin: 0 auto 0 auto;
       width: 75%;
   }
+
+  .close {
+      margin-left: 0.5em;
+      font-size: 20px;
+      color: white;
+      border: 1px solid transparent;
+      outline: none;
+  }
+
+  .close:focus {
+      border: 1px solid transparent;
+      outline: none;
+  }
+
+
+
 
 
