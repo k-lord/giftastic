@@ -1,5 +1,5 @@
 // the array of gif button topics
-var topics = ["excited","angry","happy","hangry","surprised","sad","wild"];
+var topics = ["excited","angry","happy","hangry","surprised","sad","high five","bye","shrug","yes","thumbs up","what","no","whatever","OMG","mind blown","facepalm","shame","dancing","shocked","get money","popcorn","eye roll","confused","yay","WTF","K","applause","SMH","nope","LOL","why"];
 
 //boolean statement to call on later on to toggle the GIFs between paused and playing
 var gifPaused = true;
@@ -35,7 +35,7 @@ function getGIF () {
     $("button").on("click", function(){
         console.log("button clicked");
         var x = $(this).data("search");
-        console.log(x);
+        console.log("the data-search for the clicked button is: " + x);
     
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + x + "&api_key=Yto3qlUaI5924crOZKDBgZeRIvCm4xgz&limit=12";
         console.log(queryURL);
@@ -73,10 +73,12 @@ $(document).on("click", ".gifImage", function() {
      //stop
         $(this).attr('src', src.replace(/\.gif/i, "_s.gif"))
         $(this).removeClass('playing');
+        console.log("this image is paused");
     } else {
     //play
     $(this).addClass('playing');
-    $(this).attr('src', src.replace(/\_s.gif/i, ".gif"))
+    $(this).attr('src', src.replace(/\_s.gif/i, ".gif"));
+    console.log("this image is playing");
   }
 });
 

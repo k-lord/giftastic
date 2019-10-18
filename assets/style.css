@@ -1,8 +1,10 @@
 h1 {
+    margin: 0 auto 0 auto;
     padding: 0.5em;
     text-align: center;
     font-size: 2.5em;
     background-color: #0A0F0D;
+    letter-spacing: 0.5em;
 }
 
 #gradient-text {
@@ -55,21 +57,23 @@ label {
 }
 
 img {
-    height: 250px;
-    width: 250px;
     margin-top: 1.5em;
     margin-bottom: 1.5em;
+    z-index: 1;
 }
     
 
 p {
-    position: relative;
+    /*
+    having issues getting this absolute position fixed to the image files:
+    position: absolute;
+    right: -3em;*/
     background-color: black;
     color: white;
     padding-left: 1.5em;
     padding-right: 1.5em;
     padding-top: 1.5em;
-    z-index: 3;
+    z-index: 4;
   }
 
   #GIF-area {
