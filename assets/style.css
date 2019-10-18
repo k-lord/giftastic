@@ -72,4 +72,9 @@ p {
     z-index: 3;
   }
 
+  #GIF-area {
+      margin: 0 auto 0 auto;
+      width: 75%;
+  }
+
 
