@@ -40,10 +40,18 @@ function getGIF () {
                 console.log(response);
                 $("#GIF-area").empty(); 
                 for (i = 0; i < response.data.length; i++) {
-                
-                    $("#GIF-area").append("<img class='gifImage' src='" + response.data[i].images.fixed_height_still.url + "'>");
-                    //working on getting the <p> formatting so that it becomes a text overlay on the image
-                    //$("#GIF-area").append("<p>rating: " + response.data[i].rating + "</p>");
+                    var imageDiv = $("<div>");
+                    var p = $("<p>");
+                    p.text("rating: " + response.data[i].rating);
+                    p.addClass("textbox");
+                    var image = $("<img>");
+                    image.addClass("gifImage");
+                    image.attr("src", response.data[i].images.fixed_height_still.url);
+                    imageDiv.append(p);
+                    imageDiv.append(image);
+                    $("#GIF-area").prepend(imageDiv);
+                    
+                    
                 }
             });
     })   

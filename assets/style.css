@@ -60,22 +60,8 @@ label {
 img {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
-    z-index: 1;
 }
-    
 
-p {
-    /*
-    having issues getting this absolute position fixed to the images:
-    position: absolute;
-    right: -3em;*/
-    background-color: black;
-    color: white;
-    padding-left: 1.5em;
-    padding-right: 1.5em;
-    padding-top: 1.5em;
-    z-index: 4;
-  }
 
   #GIF-area {
       margin: 0 auto 0 auto;
@@ -93,6 +79,14 @@ p {
   .close:focus {
       border: 1px solid transparent;
       outline: none;
+  }
+
+  .textbox {
+      position: relative;
+      bottom: -40px;
+      background-color:rgba(240, 255, 29, 0.3);
+      color: white;
+
   }
 
 
