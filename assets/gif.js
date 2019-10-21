@@ -16,6 +16,7 @@ var createButton = function (arr) {
         topicButton.attr("data-search", searchWord);
         topicButton.text(searchWord);
         $("#btn-placement").append(topicButton);
+
         //appending a close button to each button made
         var closeButton = $("<button>");
         closeButton.attr("id", i);
@@ -27,13 +28,11 @@ var createButton = function (arr) {
 }
 
 // the on-click function to .ajax(GET) gifs from Giphy based on data-search id's & prepend response.data[i] info to HTML
-function getGIF () {
+function getGIF (str) {
 
-    $("button").on("click", function(){
-        console.log("button clicked");
-        var x = $(this).data("search");
+        var str = $(this).data("search");
     
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + x + "&api_key=Yto3qlUaI5924crOZKDBgZeRIvCm4xgz&limit=10";
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + str + "&api_key=Yto3qlUaI5924crOZKDBgZeRIvCm4xgz&limit=10";
     
         $.ajax({url: queryURL, method: "GET"})
             .done(function(response){
@@ -53,8 +52,7 @@ function getGIF () {
                     
                     
                 }
-            });
-    })   
+            });   
 }
 
 // take the value of the #add-GIF input text from HTML, add to topics array & add the new button to HTML
@@ -63,6 +61,9 @@ $("#add-GIF").on("click", function(event) {
     var GIF = $("#GIF-input").val().trim();
     topics.push(GIF);
     createButton(topics);
+    $(".gifs").addClass("newGIF");
+    var newGIF = $(".newGIF").data("search");
+    console.log(newGIF);
     $("#GIF-input").val("");
 });
 

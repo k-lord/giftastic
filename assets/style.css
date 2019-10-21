@@ -84,12 +84,45 @@ img {
   .textbox {
       position: relative;
       bottom: -40px;
-      background-color:rgba(240, 255, 29, 0.3);
+      background-color:rgba(240, 255, 29, 0.8);
       color: white;
+      text-align: center;
 
   }
 
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 1.1em;
+    }
 
+    #btn-placement {
+        margin-left: 0.1em;
+        margin-right: 0.1em
+    }
 
+    .gifs {
+        font-size: 0.75em;
+    }
 
+    .close {
+        font-size: 1.1em;
+    }
+
+    label {
+        font-size: 1.1em;
+        width: 100%;
+        text-align: center;
+        padding-bottom: 0.5em;
+    }
+
+    #add-GIF {
+        width: 100%;
+
+    }
+
+    #GIF-input {
+        width: 100%;
+    }
+
+}
 
